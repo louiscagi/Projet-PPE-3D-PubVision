@@ -950,6 +950,125 @@ body {
 }
 
 
+/*-----------------------------------*\
+  #Work
+\*-----------------------------------*/
+
+.work { padding-block-start: calc(var(--section-padding) + 60px); }
+
+.work .container {
+  display: grid;
+  gap: 70px;
+}
+
+.work-text {
+  font-size: var(--fs-7);
+  margin-block: 30px 35px;
+}
+
+.work-content :is(.wrapper, .hero-btn) {
+  display: flex;
+  align-items: center;
+}
+
+.work-content .wrapper {
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-block-end: 30px;
+}
+
+.work-btn {
+  gap: 15px;
+  color: var(--raisin-black-1);
+  transition: var(--transition-1);
+}
+
+.work-btn:is(:hover, :focus) { color: var(--majorelle-blue); }
+
+.work-btn ion-icon { font-size: 24px; }
+
+.work-btn .span {
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+}
+
+.work .social-link .span { display: none; }
+
+.work .social-list { gap: 12px; }
+
+.work .social-link {
+  background-color: var(--white);
+  color: var(--color);
+  padding: 12px;
+  box-shadow: var(--shadow-1);
+  border-radius: var(--radius-8);
+  transition: var(--transition-2);
+}
+
+.work .social-link:is(:hover, :focus) {
+  background-color: var(--color);
+  color: var(--white);
+}
+
+/*-----------------------------------*\
+  #boutton
+\*-----------------------------------*/
+
+.Boutton { padding-block-start: calc(var(--section-padding) + 60px); background-color: var(--ghost-white);} 
+
+.Boutton .container {
+  display: grid;
+  gap: 70px;
+}
+
+.Boutton-text {
+  font-size: var(--fs-7);
+  margin-block: 30px 35px;
+}
+
+.Boutton-content :is(.wrapper, .hero-btn) {
+  display: flex;
+  align-items: center;
+}
+
+.Boutton-content .wrapper {
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-block-end: 30px;
+}
+
+.Boutton-btn {
+  gap: 15px;
+  color: var(--raisin-black-1);
+  transition: var(--transition-1);
+}
+
+.Boutton-btn:is(:hover, :focus) { color: var(--majorelle-blue); }
+
+.Boutton-btn ion-icon { font-size: 24px; }
+
+.Boutton-btn .span {
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+}
+
+.Boutton .social-link .span { display: none; }
+
+.Boutton .social-list { gap: 12px; }
+
+.Boutton .social-link {
+  background-color: #f5f5f5; 
+  padding-block-start: calc(var(--section-padding) + 60px);
+  padding: 12px;
+  box-shadow: var(--shadow-1);
+  border-radius: var(--radius-8);
+  transition: var(--transition-2);
+}
+
+.Boutton .social-link:is(:hover, :focus) {
+  background-color: var(--color);
+  color: var(--white);
+}
 
 /*-----------------------------------*\
   #FOOTER
