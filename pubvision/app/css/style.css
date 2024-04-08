@@ -508,7 +508,14 @@ body {
   background-color: var(--color);
   color: var(--white);
 }
-
+.image-rounded {
+  border-radius: 50%; /* Ceci crée un bord arrondi à 50% du rayon de l'image, ce qui donne une image complètement ronde si elle est carrée */
+  object-fit: cover; /* Ceci s'assure que l'image couvre la zone de l'image sans être déformée */
+  width: 590px; /* Remplacez par la largeur désirée */
+  height: 500px; /* Remplacez par la hauteur désirée, pour une image ronde cela doit être égal à la largeur */
+  border: 4px solid var(--majorelle-yellow); /* Ajoute une bordure, la couleur est une variable que vous pouvez définir ou remplacer par une couleur spécifique */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optionnel: Ajoute une ombre légère pour un effet en relief */
+}
 
 
 
