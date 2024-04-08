@@ -1,11 +1,7 @@
 <div align="center">
   
-  ![GitHub repo size](https://img.shields.io/github/repo-size/codewithsadee/pixology)
-  ![GitHub stars](https://img.shields.io/github/stars/codewithsadee/pixology?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/codewithsadee/pixology?style=social)
-[![Twitter Follow](https://img.shields.io/twitter/follow/codewithsadee_?style=social)](https://twitter.com/intent/follow?screen_name=codewithsadee_)
-  [![YouTube Video Views](https://img.shields.io/youtube/views/olASpEtIwRY?style=social)](https://youtu.be/olASpEtIwRY)
-
+  ![GitHub repo size](https://github.com/louiscagi/Projet-PPE-3D-Publicis)
+  
   <br />
   <br />
 
@@ -13,7 +9,6 @@
 
   Pixology is a fully responsive digital agency website, <br />Responsive for all devices, build using HTML, CSS, and JavaScript.
 
-  <a href="https://codewithsadee.github.io/pixology/"><strong>➥ Live Demo</strong></a>
 
 </div>
 
@@ -36,18 +31,18 @@ To run **Pixology** locally, run this command on your git bash:
 Linux and macOS:
 
 ```bash
-sudo git clone https://github.com/codewithsadee/pixology.git
+sudo git clone https://github.com/louiscagi/Projet-PPE-3D-Publicis
 ```
 
 Windows:
 
 ```bash
-git clone https://github.com/codewithsadee/pixology.git
+git clone https://github.com/louiscagi/Projet-PPE-3D-Publicis
 ```
 
 ### Contact
 
-If you want to contact with me you can reach me at [Twitter](https://www.twitter.com/codewithsadee).
+If you want to contact with me you can reach me at [Numéro](0628828828).
 
 ### License
 
