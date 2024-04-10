@@ -205,7 +205,7 @@
               <div class="service-card" style="--color: 343, 98%, 60%">
 
                 <div class="card-icon">
-                  <img src="./app/images/lucien.jpg" width="30" height="30" loading="lazy"
+                  <img src="./app/images/lucien.png" width="30" height="30" loading="lazy"
                     alt="service icon">
                 </div>
 
@@ -307,7 +307,7 @@
                 <span class="has-before">Aymeric MOULET</span>
               </h1>
               <p class="aymeric-text">
-                ÉCRIT TA PRÉSENTATION ICI 
+                Comme les autres membres de l'équipe, je suis étudiant à l'École d'Ingénieurs ECE. Ce projet est très vaste, c'est pourquoi je me suis spécialisé dans Unity. J'espère que notre application vous sera utile dans vos tâches.
               </p>
             </div>
             <figure class="aymeric-banner" style="margin-left: auto; width: 200px;">
@@ -327,11 +327,11 @@
                 <span class="has-before">Lucien TOUZÉ-REMEDIANI</span>
               </h1>
               <p class="lucien-text">
-                ÉCRIT TA PRÉSENTATION ICI 
+                Passionné d'ingénierie informatique et fervent adepte de la technologie, je suis un étudiant travaillant avec acharnement. Mon intérêt pour les défis techniques m'a conduit à choisir des projets ambitieux, comme celui-ci, où je sors de ma zone de confort pour explorer de nouveaux domaines.
               </p>
             </div>
             <figure class="lucien-banner" style="margin-left: auto; width: 200px;">
-              <img src="./app/images/lucien.jpg" width="170" height="170" alt="Louis CAGI NICOLAU" class="w-100">
+              <img src="./app/images/lucien.png" width="170" height="170" alt="Louis CAGI NICOLAU" class="w-100">
             </figure>
           </div>
         </div>
@@ -401,19 +401,30 @@
    
     
       <section class="section Boutton" id="Boutton" aria-label="Boutton">
-        
-        <div class="container">
+  <div class="container">
+    <!-- Bouton pour ouvrir le menu -->
+    <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+      <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+    </button>
+
+    <!-- Bouton pour afficher l'image -->
+    <button class="btn btn-primary has-before has-after" id="imageToggleBtn">Image 🚀</button>
+
+    <!-- Conteneur pour le cadran et l'image -->
+    <div id="cadranImageContainer" class="image-cadran" style="display: none;">
+      <img src="./app/images/marco.jpg" alt="Image Dynamique" class="image-in-cadran">
+    </div>
+  </div>
+</section>
+
+      
+      
+            
     
-          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
-          </button>
-    
-          <a href="#Transformation" class="btn btn-primary has-before has-after">Image 🚀</a>
-    
-          <div class="overlay" data-nav-toggler data-overlay></div>
-    
+            <div class="overlay" data-nav-toggler data-overlay></div>
         </div>
-      </section>
+    </section>
+    
 
     </article>
   </main>
@@ -492,6 +503,21 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+  <script>
+ document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('imageToggleBtn').addEventListener('click', function() {
+    var cadranImageContainer = document.getElementById('cadranImageContainer');
+    if (cadranImageContainer.style.display === 'none' || cadranImageContainer.style.display === '') {
+      cadranImageContainer.style.display = 'block'; // Affiche le cadran avec l'image
+    } else {
+      cadranImageContainer.style.display = 'none'; // Cache le cadran
+    }
+  });
+});
+
+
+    
+</script>
 </body>
 
 </html>

@@ -525,9 +525,19 @@ body {
 \*-----------------------------------*/
 
 .service { background-color: var(--ghost-white); }
+.service .grid-list {
+  display: flex; /* Ou `display: grid;` si vous préférez une grille */
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante */
+  gap: 20px; /* Espace entre les cartes */
+  justify-content: center; /* Centre les cartes horizontalement */
+  margin-top: 30px; /* Ajoute un peu d'espace entre le titre et les cartes */
+}
 
-.service .section-title { margin-block: 30px 60px; }
-
+.service .section-title {
+  text-align: center; /* Centre le titre horizontalement */
+  margin-top: 30px; /* Espacement au-dessus du titre, si nécessaire */
+  margin-bottom: 20px; /* Espacement entre le titre et les cartes */
+}
 .service-card,
 .service .link-card {
   padding: 45px;
@@ -1780,6 +1790,37 @@ body {
   }
 
   .blog-card .card-title { --fs-4: 2.4rem; }
- 
+  .content-container {
+    position: relative; /* Position relative pour le parent */
+    /* Autres styles... */
+}
+
+/* Style existant ... */
+
+/* Style pour le conteneur principal */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+/* Style pour le conteneur de l'image et du cadran */
+.image-cadran {
+  border: 2px solid black; /* Bordure noire pour le cadran */
+  margin-left: 500px; /* Espace entre le bouton et le cadran */
+  padding: 10px; /* Espace autour de l'image dans le cadran */
+  width: 300px; /* Nouvelle largeur, 2x plus grande que la taille originale */
+  height: auto; /* Hauteur automatique pour conserver le ratio de l'image */
+  display: flex; /* Utilisez flexbox pour centrer l'image */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style pour l'image à l'intérieur du cadran */
+.image-in-cadran {
+  width: 100%; /* L'image remplit la largeur du cadran */
+  height: auto; /* Hauteur automatique pour conserver le ratio de l'image */
+}
+
 
 }
