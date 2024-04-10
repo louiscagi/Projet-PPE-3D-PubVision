@@ -287,7 +287,7 @@
                 <span class="has-before">Alexandre BENSARSA</span>
               </h1>
               <p class="alex-text">
-                ÉCRIT TA PRÉSENTATION ICI 
+                Étudiant en M1 Systèmes d'information à l'ECE Paris, je souhaite travailler dans le cloud engineering. Ce projet m'a permis d'aiguiser mes compétences et ma curiosité dans le développement web, et spécialement backend. Ainsi, j'ai aussi pu découvrir le monde de la publicité sur un projet concret, et améliorer mes compétences en développement bases de données et backend. 
               </p>
             </div>
             <figure class="alex-banner" style="margin-left: auto; width: 200px;">
@@ -505,18 +505,46 @@
 
   <script>
  document.addEventListener('DOMContentLoaded', function() {
+  var image = document.querySelector('.image-in-cadran'); // Remplacez par l'ID ou la classe de votre image
+  var moveAmount = 10; // Montant de déplacement en pixels
+
+  // Initialise la position de l'image
+  var position = { top: 0, left: 0 };
+
+  function updatePosition() {
+    image.style.top = position.top + 'px';
+    image.style.left = position.left + 'px';
+  }
+
+  document.addEventListener('keydown', function(event) {
+    switch(event.key) {
+      case 'ArrowUp':
+        position.top -= moveAmount;
+        break;
+      case 'ArrowDown':
+        position.top += moveAmount;
+        break;
+      case 'ArrowLeft':
+        position.left -= moveAmount;
+        break;
+      case 'ArrowRight':
+        position.left += moveAmount;
+        break;
+    }
+    updatePosition(); // Met à jour la position de l'image
+  });
+
+  // Bouton d'affichage de l'image
   document.getElementById('imageToggleBtn').addEventListener('click', function() {
     var cadranImageContainer = document.getElementById('cadranImageContainer');
     if (cadranImageContainer.style.display === 'none' || cadranImageContainer.style.display === '') {
       cadranImageContainer.style.display = 'block'; // Affiche le cadran avec l'image
-    } else {
-      cadranImageContainer.style.display = 'none'; // Cache le cadran
-    }
-  });
+} else {
+cadranImageContainer.style.display = 'none'; // Cache le cadran
+}
+});
 });
 
-
-    
 </script>
 </body>
 
