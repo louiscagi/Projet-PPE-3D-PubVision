@@ -401,19 +401,25 @@
    
     
       <section class="section Boutton" id="Boutton" aria-label="Boutton">
-        
         <div class="container">
-    
+      
           <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
             <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
           </button>
-    
-          <a href="#Transformation" class="btn btn-primary has-before has-after">Image 🚀</a>
-    
+      
+          <!-- Ce lien agit comme un bouton pour charger l'image -->
+          <button id="fetch-data-button" class="btn btn-primary has-before has-after">
+            Image 🚀
+          </button>
+          <!-- Un conteneur pour l'image qui sera chargée -->
+          <div id="results">
+            <!-- L'image chargée sera affichée ici -->
+          </div>
           <div class="overlay" data-nav-toggler data-overlay></div>
-    
+      
         </div>
       </section>
+      
 
     </article>
   </main>
