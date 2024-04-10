@@ -504,48 +504,76 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <script>
- document.addEventListener('DOMContentLoaded', function() {
-  var image = document.querySelector('.image-in-cadran'); // Remplacez par l'ID ou la classe de votre image
-  var moveAmount = 10; // Montant de déplacement en pixels
+  document.addEventListener('DOMContentLoaded', function() {
+  var cadranImageContainer = document.getElementById('cadranImageContainer');
+  var image = document.querySelector('.image-in-cadran');
+  var moveAmount = 10; // Pixels to move per arrow key press
+  var scale = 1; // Initial zoom level
+  var scaleIncrement = 0.1; // Amount to zoom in or out
 
-  // Initialise la position de l'image
-  var position = { top: 0, left: 0 };
+  function updateImagePosition() {
+    // Calculate bounds based on current scale
+    var rect = cadranImageContainer.getBoundingClientRect();
+    var imgRect = image.getBoundingClientRect();
+    
+    // Calculate the maximum allowed top and left values to keep the image within bounds
+    var maxLeft = rect.width - (imgRect.width * scale);
+    var maxTop = rect.height - (imgRect.height * scale);
 
-  function updatePosition() {
-    image.style.top = position.top + 'px';
-    image.style.left = position.left + 'px';
+    // Use Math.min and Math.max to prevent the image from moving out of bounds
+    var newLeft = Math.min(0, Math.max(maxLeft, parseFloat(image.style.left) || 0));
+    var newTop = Math.min(0, Math.max(maxTop, parseFloat(image.style.top) || 0));
+
+    // Apply the new top and left values to position the image
+    image.style.left = newLeft + 'px';
+    image.style.top = newTop + 'px';
+    image.style.transform = `translate(${newLeft}px, ${newTop}px) scale(${scale})`;
   }
 
   document.addEventListener('keydown', function(event) {
+    var deltaX = 0;
+    var deltaY = 0;
+
     switch(event.key) {
-      case 'ArrowUp':
-        position.top -= moveAmount;
+      case 'ArrowUp':    deltaY = moveAmount; break;
+      case 'ArrowDown':  deltaY = -moveAmount; break;
+      case 'ArrowLeft':  deltaX = moveAmount; break;
+      case 'ArrowRight': deltaX = -moveAmount; break;
+      case 'z': 
+        scale = Math.min(4, scale + scaleIncrement); // Limit max scale to 4x
         break;
-      case 'ArrowDown':
-        position.top += moveAmount;
-        break;
-      case 'ArrowLeft':
-        position.left -= moveAmount;
-        break;
-      case 'ArrowRight':
-        position.left += moveAmount;
+      case 's': 
+        scale = Math.max(1, scale - scaleIncrement); // Minimum scale is 1x (original size)
         break;
     }
-    updatePosition(); // Met à jour la position de l'image
+
+    if (event.key === 'z' || event.key === 's') {
+      // Update scale only if zooming in or out
+      image.style.transform = `scale(${scale})`;
+    } else {
+      // Convert movement amount by current scale factor to ensure consistent cursor movement
+      image.style.left = (parseFloat(image.style.left) || 0) + deltaX / scale + 'px';
+      image.style.top = (parseFloat(image.style.top) || 0) + deltaY / scale + 'px';
+    }
+
+    updateImagePosition(); // Recalculate position and apply bounds
   });
 
-  // Bouton d'affichage de l'image
   document.getElementById('imageToggleBtn').addEventListener('click', function() {
-    var cadranImageContainer = document.getElementById('cadranImageContainer');
     if (cadranImageContainer.style.display === 'none' || cadranImageContainer.style.display === '') {
-      cadranImageContainer.style.display = 'block'; // Affiche le cadran avec l'image
-} else {
-cadranImageContainer.style.display = 'none'; // Cache le cadran
-}
-});
+      cadranImageContainer.style.display = 'block'; // Show image container
+      image.style.left = '0px'; // Reset position
+      image.style.top = '0px';
+      image.style.transform = 'translate(0px, 0px) scale(1)'; // Reset transform
+      scale = 1; // Reset scale
+    } else {
+      cadranImageContainer.style.display = 'none'; // Hide image container
+    }
+  });
 });
 
-</script>
+    </script>
+    
 </body>
 
 </html>

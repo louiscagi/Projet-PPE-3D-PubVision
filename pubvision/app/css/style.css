@@ -1817,9 +1817,21 @@ body {
 }
 
 /* Style pour l'image à l'intérieur du cadran */
+#cadranImageContainer {
+  position: relative;
+  display: inline-block; /* Permet au conteneur de s'adapter à la taille de l'image */
+  overflow: hidden; /* Masque tout débordement dû au zoom */
+  border: 2px solid black; /* Bordure noire pour créer les contours */
+  padding: 0; /* Ajustez selon vos besoins pour l'espacement interne */
+  line-height: 0; /* Élimine l'espace supplémentaire autour de l'image */
+}
+
 .image-in-cadran {
-  width: 100%; /* L'image remplit la largeur du cadran */
-  height: auto; /* Hauteur automatique pour conserver le ratio de l'image */
+  display: block;
+  width: auto; /* Ou spécifiez une largeur fixe selon vos besoins */
+  height: auto; /* Ou spécifiez une hauteur fixe selon vos besoins */
+  max-width: 100%; /* S'assure que l'image ne dépasse pas du conteneur */
+  max-height: 100%; /* Idem pour la hauteur */
 }
 
 
