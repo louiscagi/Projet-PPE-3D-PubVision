@@ -1,14 +1,12 @@
 'use strict';
 
 // Fonction pour ajouter un événement à un élément
-const addEventOnElem = function (elem, type, callback) {
-  if (NodeList.prototype.isPrototypeOf(elem)) { // Vérifie si 'elem' est une NodeList
+const addEventOnElem = function(elem, type, callback) {
+  if (NodeList.prototype.isPrototypeOf(elem)) {
     for (let i = 0; i < elem.length; i++) {
-      if (elem[i] instanceof Element) { // Ajoute une vérification supplémentaire
-        elem[i].addEventListener(type, callback);
-      }
+      elem[i].addEventListener(type, callback);
     }
-  } else if (elem instanceof Element) { // Vérifie si 'elem' est un Element
+  } else {
     elem.addEventListener(type, callback);
   }
 };
@@ -19,64 +17,109 @@ const navTogglers = document.querySelectorAll("[data-nav-toggler]");
 const navbarLinks = document.querySelectorAll("[data-nav-link]");
 const overlay = document.querySelector("[data-overlay]");
 
-const toggleNavbar = function () {
+// Ajoute des événements sur les éléments de la navbar
+addEventOnElem(navTogglers, "click", toggleNavbar);
+addEventOnElem(navbarLinks, "click", closeNavbar);
+
+// Gestion du chargement d'images et de l'interaction avec celles-ci
+document.addEventListener('DOMContentLoaded', function() {
+  const fetchDataButton = document.getElementById('fetch-data-button');
+  const resultsContainer = document.getElementById('results');
+  
+  fetchDataButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    fetch('/api/images')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        resultsContainer.innerHTML = '';
+        const img = new Image();
+        img.src = data.imageData;
+        img.alt = 'Loaded Image';
+        img.className = 'image-in-cadran';
+        img.onload = () => {
+          initializeImageInteractions(img);
+        };
+        resultsContainer.appendChild(img);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  });
+});
+
+// Fonctions pour la navigation
+function toggleNavbar() {
   navbar.classList.toggle("active");
   overlay.classList.toggle("active");
-};
+}
 
-addEventOnElem(navTogglers, "click", toggleNavbar);
-
-const closeNavbar = function () {
+function closeNavbar() {
   navbar.classList.remove("active");
   overlay.classList.remove("active");
-};
-
-addEventOnElem(navbarLinks, "click", closeNavbar);
+}
 
 // Fonction pour afficher le header et le bouton de retour en haut de la page lors du défilement
 const header = document.querySelector("[data-header]");
 const backTopBtn = document.querySelector("[data-back-top-btn]");
 
-const headerActive = function () {
-  if (window.scrollY > 80) {
-    header.classList.add("active");
-    backTopBtn.classList.add("active");
-  } else {
-    header.classList.remove("active");
-    backTopBtn.classList.remove("active");
-  }
-};
-
-window.addEventListener('scroll', headerActive);
-
-// Attend que le DOM soit complètement chargé
-document.addEventListener('DOMContentLoaded', () => {
-  // Ajoute un écouteur d'événements au bouton pour la récupération des données
-  const fetchDataButton = document.getElementById('fetch-data-button');
-  if (fetchDataButton) { // S'assure que le bouton existe avant d'ajouter l'écouteur d'événements
-    const resultsContainer = document.getElementById('results');
-
-    fetchDataButton.addEventListener('click', function(event) {
-      event.preventDefault(); // Empêche le comportement par défaut du lien
-      fetch('/api/images') // Utilise le nouvel endpoint pour les données
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          // Efface les résultats précédents
-          resultsContainer.innerHTML = '';
-          // Crée une nouvelle balise image et la définit avec l'URL de l'image
-          const img = document.createElement('img');
-          img.src = data.imageData; // Utilise l'attribut imageData contenant l'image en base64
-          img.alt = 'Image chargée'; // Ajoutez un texte alternatif pour l'accessibilité
-          resultsContainer.appendChild(img);
-        })
-        .catch(error => {
-          console.error('Il y a eu un problème avec l\'opération fetch: ' + error.message);
-        });
-    });
-  }
+window.addEventListener('scroll', function() {
+  header.classList.toggle("active", window.scrollY > 80);
+  backTopBtn.classList.toggle("active", window.scrollY > 80);
 });
+
+// Fonction pour la manipulation de l'image
+function initializeImageInteractions(image) {
+  let scale = 1;
+  const scaleIncrement = 0.1;
+  const moveAmount = 10;
+  const cadran = document.getElementById('cadranImageContainer');
+
+  document.addEventListener('keydown', function(event) {
+    switch (event.key) {
+      case 'p':
+        image.style.top = `${Math.max(-image.offsetHeight * (scale - 1), parseInt(image.style.top) - moveAmount)}px`;
+        break;
+      case 'o':
+        image.style.top = `${Math.min(0, parseInt(image.style.top) + moveAmount)}px`;
+        break;
+      case 'ArrowLeft':
+        image.style.left = `${Math.max(-image.offsetWidth * (scale - 1), parseInt(image.style.left) - moveAmount)}px`;
+        break;
+      case 'ArrowRight':
+        image.style.left = `${Math.min(0, parseInt(image.style.left) + moveAmount)}px`;
+        break;
+      case 'z':
+        scale = Math.min(4, scale + scaleIncrement);
+        break;
+      case 's':
+        scale = Math.max(1, scale - scaleIncrement);
+        break;
+    }
+    image.style.transform = `scale(${scale})`;
+    updateImagePosition();
+  });
+
+  function updateImagePosition() {
+    const rect = cadran.getBoundingClientRect();
+    const imgRect = image.getBoundingClientRect();
+    const maxLeft = 0;
+    const maxTop = 0;
+    const minLeft = rect.width - imgRect.width * scale;
+    const minTop = rect.height - imgRect.height * scale;
+
+    image.style.left = `${Math.min(maxLeft, Math.max(minLeft, parseInt(image.style.left)))}px`;
+    image.style.top = `${Math.min(maxTop, Math.max(minTop, parseInt(image.style.top)))}px`;
+  }
+
+  // Initialise le style de l'image pour la manipulation
+  image.style.position = 'absolute';
+  image.style.left = '50%';
+  image.style.top = '50%';
+  image.style.transform = 'translate(-50%, -50%)';
+  image.style.transformOrigin = 'top left';
+}
