@@ -24,4 +24,4 @@ POUR LANCER LE PROJET UNE FOIS CLONE, VEUILLEZ FAIRE LES ETAPES SUIVANTES :
 Une fois cela fait, vous serez capable de lancer le projet de la manière suuivante :
 5) node server.js
 
-A NOTER : Vous devrez avoir une base de donnée comme décrite "Image" dans les documents du PPE, pour avoir accès aux documents.
+A NOTER : Vous devrez avoir une base de donnée comme décrite "Image" dans les documents du PPE, du dossier d'archivage dans la partie "Modèle de données" dans l'architecture technique, pour avoir accès aux documents aux images prégénrées depuis unity pour voir le fonctionnement. 
