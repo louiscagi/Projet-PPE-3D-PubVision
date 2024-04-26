@@ -16,3 +16,12 @@ JavaScript
 ExpressJS
 CSS/Html
 
+POUR LANCER LE PROJET UNE FOIS CLONE, VEUILLEZ FAIRE LES ETAPES SUIVANTES : 
+1) cd pubvision
+2) npm install express
+3) npm install mysql2
+4) npm install cors
+Une fois cela fait, vous serez capable de lancer le projet de la manière suuivante :
+5) node server.js
+
+A NOTER : Vous devrez avoir une base de donnée comme décrite "Image" dans les documents du PPE, pour avoir accès aux documents.
